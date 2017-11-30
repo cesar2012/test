@@ -137,19 +137,5 @@ class ProductoController extends Controller
 		return redirect()->route('productos.index')->with('message', 'Item deleted successfully.');
 	}
 
-   /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(Request $request)
-    {
-        return Validator::make($request->all(), [
-            'codigo' => 'required|string|max:200',
-            'nombreproducto' => 'required|string|min:10',
-            'descripcion' => 'required|string|min:6',
-        ]);
-    }
 
 }
