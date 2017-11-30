@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Producto;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 class ProductoController extends Controller
 {
@@ -59,6 +60,13 @@ class ProductoController extends Controller
 	 */
 	public function store(Request $request)
 	{
+	    $validatedData = $request->validate([
+            'codigo' => 'required|string|min:5',
+            'nombreproducto' => 'required|string|min:10',
+            'descripcion' => 'required|string|min:6',
+        ]);
+		//Log::info('ProductoController->store' . $validatedData );
+	
 		$inputs = $request->all();
 		$this->model->create($inputs);
 
@@ -100,6 +108,14 @@ class ProductoController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
+
+	    $validatedData = $request->validate([
+            'codigo' => 'required|string|min:5',
+            'nombreproducto' => 'required|string|min:10',
+            'descripcion' => 'required|string|min:6',
+        ]);
+		//Log::info('ProductoController->update' . $validatedData );
+
 		$inputs = $request->all();
 
 		$producto = $this->model->findOrFail($id);		
@@ -120,4 +136,20 @@ class ProductoController extends Controller
 
 		return redirect()->route('productos.index')->with('message', 'Item deleted successfully.');
 	}
+
+   /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(Request $request)
+    {
+        return Validator::make($request->all(), [
+            'codigo' => 'required|string|max:200',
+            'nombreproducto' => 'required|string|min:10',
+            'descripcion' => 'required|string|min:6',
+        ]);
+    }
+
 }
