@@ -1,9 +1,9 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('header')
     <div class="page-header clearfix">
         <h1>
-            <i class="glyphicon glyphicon-align-justify"></i> Producto
+            Producto
             <a class="btn btn-success pull-right" href="{{ route('productos.create') }}"><i class="glyphicon glyphicon-plus"></i> Create</a>
         </h1>
     </div>

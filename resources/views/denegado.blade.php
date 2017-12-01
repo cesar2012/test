@@ -1,8 +1,10 @@
-@extends('master')
+@extends('layouts.app')
 
-@section('contenido')
-
+@section('content')
+ <div class="flex-center position-ref ">
+ <div class="title m-b-md">
         Acceso Denegado
-        
+  </div>
+   </div>       
 @endsection            
 
